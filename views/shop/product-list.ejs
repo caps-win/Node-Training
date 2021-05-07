@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../includes/head.ejs') %>
+
+  <body>
+    <%- include('../includes/navigation.ejs') %>
+      <main>
+        <% if (hasProducts) { %>
+          <div class="grid">
+            <% prods.forEach(element=> { %>
+              <article class="card product-item">
+                <header class="card__header">
+                  <h1 class="product__title">
+                    <%= element.title %>
+                  </h1>
+                </header>
+                <div class="card__image">
+                  <img src="<%= element.imageUrl %>" alt="<%= element.title %>">
+                </div>
+                <div class="card__content">
+                  <h2 class="product__price">
+                    $ <%= element.price %>
+                  </h2>
+                  <p class="product__description">
+                    <%= element.description %>
+                  </p>
+                </div>
+                <div class="card__actions">
+                  <a href="/products/<%= element.id %>" class="btn">Details</a>
+                  <%-include('../includes/cart.ejs', {element: element}) %>
+                </div>
+              </article>
+              <% }) %>
+          </div>
+          <% } else {%>
+            <h1>Not products found!</h1>
+            <% } %>
+      </main>
+      <%- include('../includes/end.ejs') %>
+  </body>
+
+</html>
